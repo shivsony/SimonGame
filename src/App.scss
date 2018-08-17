@@ -1,3 +1,9 @@
 .App {
   text-align: center;
+  .wrapper {
+    width: 100%;
+    position: relative;
+    height: 510px;
+    background-image: url("./back.png");
+  }
 }

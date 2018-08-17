@@ -1,0 +1,29 @@
+.circle-wrapper {
+    width: 80%;
+    height: 500px;
+    margin: 0 auto;
+    .upper-circle {
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        .box {
+            width: 200px;
+            height: 200px;
+            background: #fff;
+            border: 20px solid #363636;
+        }
+        .t-l {
+            border-top-left-radius: 100%;
+        }
+        .t-r {
+            border-top-right-radius: 100%;
+        }
+        .b-l {
+            border-bottom-left-radius: 100%; 
+        }
+        .b-r {
+            border-bottom-right-radius: 100%;
+        }
+    }
+}

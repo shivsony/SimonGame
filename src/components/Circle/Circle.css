@@ -1,0 +1,22 @@
+.circle-wrapper {
+  width: 80%;
+  height: 500px;
+  margin: 0 auto; }
+  .circle-wrapper .upper-circle {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center; }
+    .circle-wrapper .upper-circle .box {
+      width: 200px;
+      height: 200px;
+      background: #fff;
+      border: 20px solid #363636; }
+    .circle-wrapper .upper-circle .t-l {
+      border-top-left-radius: 100%; }
+    .circle-wrapper .upper-circle .t-r {
+      border-top-right-radius: 100%; }
+    .circle-wrapper .upper-circle .b-l {
+      border-bottom-left-radius: 100%; }
+    .circle-wrapper .upper-circle .b-r {
+      border-bottom-right-radius: 100%; }
