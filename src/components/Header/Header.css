@@ -1,2 +1,6 @@
 .header {
-  color: aqua; }
+  background: cadetblue;
+  font-weight: 800;
+  font-size: 1rem;
+  font-family: Georgia, serif;
+  padding: 2%; }
