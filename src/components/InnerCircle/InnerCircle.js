@@ -25,12 +25,16 @@ class InnerCircle extends React.Component {
                     <div className="stickt btn red clicable">
                     </div>
                 </div>
-                <span className="lebel">count start strict</span>
+                <div className="lebels">
+                  <div className="inline lebel cnt">count</div>
+                  <div className="inline lebel st" >start</div>
+                  <div className="inline lebel stct" >strict</div>
+                </div>
                 <div >
                     <span className="inline">off</span>
                     <div onClick={this.handelClick} className="switch inline">
                         {this.state.switch===false ? <div className="slider__off"></div>:<div className="slider__on"></div>}
-                    </div>  
+                    </div>
                     <span className="inline">on</span>
                 </div>
             </div>

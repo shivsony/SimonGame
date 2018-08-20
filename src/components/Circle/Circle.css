@@ -20,3 +20,11 @@
       border-bottom-left-radius: 100%; }
     .circle-wrapper .upper-circle .b-r {
       border-bottom-right-radius: 100%; }
+    .circle-wrapper .upper-circle .yellow {
+      background: #b3b335; }
+    .circle-wrapper .upper-circle .red {
+      background: #ca4444; }
+    .circle-wrapper .upper-circle .green {
+      background: #3c883c; }
+    .circle-wrapper .upper-circle .blue {
+      background: #4747ad; }

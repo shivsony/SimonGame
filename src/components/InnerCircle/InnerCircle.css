@@ -44,6 +44,12 @@
     font-size: 0.7em; }
   .inner-circle .inline {
     display: inline-block; }
+  .inner-circle .cnt {
+    margin-right: 30px; }
+  .inner-circle .st {
+    margin-left: 25px; }
+  .inner-circle .stct {
+    margin-left: 30px; }
   .inner-circle .switch {
     width: 30px;
     height: 10px;
@@ -59,4 +65,4 @@
       width: 15px;
       height: 10px;
       background: #578EDB;
-      left: 3px; }
+      margin-left: 15px; }
