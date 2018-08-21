@@ -28,14 +28,30 @@
         .yellow {
           background: #b3b335;
         }
+        .yellow:active{
+            background: yellow;
+        }
         .red {
           background: #ca4444;
+        }
+        .red:active {
+            background: red;
         }
         .green {
           background: #3c883c;
         }
+        .green:active {
+            background: green;
+        }
         .blue {
           background: #4747ad;
+        }
+        .blue:active{
+            background: blue;
+        }
+
+        .darkblue {
+            background: blue;
         }
     }
 }

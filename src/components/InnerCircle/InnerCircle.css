@@ -21,7 +21,10 @@
       height: 30px;
       border: 5px solid #444;
       border-radius: 15%;
-      background: #320715; }
+      background: #320715;
+      color: red;
+      font-size: 1.3rem;
+      margin-top: 3px; }
     .inner-circle .display-buttons .btn {
       width: 20px;
       height: 20px;
@@ -51,18 +54,18 @@
   .inner-circle .stct {
     margin-left: 30px; }
   .inner-circle .switch {
-    width: 30px;
-    height: 10px;
-    border: 4px solid #444;
-    border-radius: 15%;
-    margin: 0 auto; }
+    width: 35px;
+    height: 15px;
+    border: 2px solid #444;
+    border-radius: 7%;
+    margin: 0 auto;
+    background: #444; }
     .inner-circle .switch .slider__off {
-      width: 15px;
-      height: 10px;
-      background: #578EDB;
-      left: 0; }
+      width: 19px;
+      height: 15px;
+      background: #578EDB; }
     .inner-circle .switch .slider__on {
-      width: 15px;
-      height: 10px;
+      width: 19px;
+      height: 15px;
       background: #578EDB;
       margin-left: 15px; }

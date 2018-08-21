@@ -22,9 +22,19 @@
       border-bottom-right-radius: 100%; }
     .circle-wrapper .upper-circle .yellow {
       background: #b3b335; }
+    .circle-wrapper .upper-circle .yellow:active {
+      background: yellow; }
     .circle-wrapper .upper-circle .red {
       background: #ca4444; }
+    .circle-wrapper .upper-circle .red:active {
+      background: red; }
     .circle-wrapper .upper-circle .green {
       background: #3c883c; }
+    .circle-wrapper .upper-circle .green:active {
+      background: green; }
     .circle-wrapper .upper-circle .blue {
       background: #4747ad; }
+    .circle-wrapper .upper-circle .blue:active {
+      background: blue; }
+    .circle-wrapper .upper-circle .darkblue {
+      background: blue; }
