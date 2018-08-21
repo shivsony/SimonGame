@@ -55,7 +55,7 @@ class Circle extends React.Component {
     }
     render() {
         const {number,start} = this.props
-        if(start && this.state.temp){
+        if(start && this.state.temp && this.props.switch){
             this.setState({
                 temp: false
             })

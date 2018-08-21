@@ -4,44 +4,17 @@ class InnerCircle extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            switch: false,
-            start: false,
-            count: 0
+            count: 1
         }
-        this.switch = this.switch.bind(this);
-        this.start = this.start.bind(this);
-    }
-    switch() {
-        this.setState({
-            switch: !this.state.switch,
-        })
-        this.state.switch===false ? this.setState({
-            start:false,
-            count: 0
-        }) : ''
-    }
-    start() {
-        this.setState({
-            start: true,
-            count: 0
-        })
-        this.state.start===true ? this.gameOn() :''
-    }
-    gameOn() {
-        setInterval(()=>{
-            this.setState({
-                count: this.state.count + 1
-            })
-        },500)
     }
     render() {
         return(
             <div className="inner-circle">
-                <h1>Simons</h1>
+                <h1>Simon</h1>
                 <div className="display-buttons">
                     <div className="display">
                         {
-                            this.state.switch===true ? 
+                            this.props.switch===true ? 
                             this.state.count === 0 ? '--' :
                             <span>{this.state.count}</span> : ''
                         }
@@ -58,8 +31,8 @@ class InnerCircle extends React.Component {
                 </div>
                 <div >
                     <span className="inline lebel">off</span>
-                    <div onClick={this.switch} className="switch inline">
-                        {this.state.switch===false ? <div className="slider__off"></div>:<div className="slider__on"></div>}
+                    <div onClick={this.props.power} className="switch inline">
+                        {this.props.switch===false ? <div className="slider__off"></div>:<div className="slider__on"></div>}
                     </div>
                     <span className="inline lebel">on</span>
                 </div>

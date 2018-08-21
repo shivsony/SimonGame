@@ -13,6 +13,25 @@ class App extends Component {
     }
   this.handelClick = this.handelClick.bind(this);
   this.startGame = this.startGame.bind(this);
+  this.power = this.power.bind(this);
+  }
+  pattern() {
+    var rand = setInterval( () => {
+      var nu = Math.floor(Math.random()*4) + 1;
+      this.setState({
+        number: nu 
+      })
+      console.log(this.state.number)
+    }, 1000  )
+    if(this.state.switch){
+      clearInterval(rand);
+    }
+  }
+  power() {
+    this.setState({
+      switch: !this.state.switch
+    })
+    console.log(this.state.switch)
   }
   handelClick(event) {
     this.setState({
@@ -25,22 +44,13 @@ class App extends Component {
           start: true
       })
   }
-  pattern() {
-    setInterval( () => {
-      var nu = Math.floor(Math.random()*4) + 1;
-      this.setState({
-        number: nu 
-      })
-      console.log(this.state.number)
-    }, 1000  )
-  }
   render() {
     return (
       <div className="App">
         <Header/>
         <div className="wrapper">
-            <Circle number={this.state.number} start={this.state.start}>
-              <InnerCircle startGame={this.startGame} switch={this.state.switch}/>
+            <Circle number={this.state.number} start={this.state.start} switch={this.state.switch}>
+              <InnerCircle startGame={this.startGame} switch={this.state.switch} power={this.power} />
             </Circle>
         </div>
       </div>
