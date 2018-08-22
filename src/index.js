@@ -1,8 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { Provider } from 'react-redux';
+import { AppContainer } from 'react-hot-loader';
+import Root from './containers/Root';
+import store from './store';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+const render = (Component) => {
+  ReactDOM.render(
+    <AppContainer>
+      <Provider store={store}>
+        <Component />
+      </Provider>
+    </AppContainer>,
+    document.getElementById('root'),
+  );
+};
+
+render(Root);
+
+if (module.hot) {
+  module.hot.accept('./containers/Root', () => {
+    render(Root);
+  });
+}
