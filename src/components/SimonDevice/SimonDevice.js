@@ -1,10 +1,13 @@
 import React from 'react';
-
+import Header from '../Header/Header';
+import './SimonDevice.css';
 class SimonDevice extends React.Component {
     render(){
         return(
             <div className="App">
-                <p>Start from here</p>
+                <Header/>
+                <div className="simon-device-wraper">
+                </div>
             </div>
         );
     }
