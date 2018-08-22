@@ -9,12 +9,22 @@ class Circle extends React.Component {
             color3: '',
             color4: '',
             arr: [],
+            clickedArray: [],
             temp: true
         }
         this.random = this.random.bind(this);
+        this.handelClick = this.handelClick.bind(this);
+    }
+    handelClick(event) {
+        var temp = this.state.clickedArray
+        var value = event.target.id
+        temp.push(value);
+        this.setState({
+            clickedArray: temp
+        })
     }
     random() {
-        setInterval( ()=>{
+        var ran = setInterval( ()=>{
             var nu = Math.floor(Math.random()*4) + 1;
             var newArr = this.state.arr;
             newArr.push(nu);
@@ -22,6 +32,15 @@ class Circle extends React.Component {
                 arr: newArr
             })
             console.log(this.state.arr)
+            if(this.props.switch===false){
+                this.setState({
+                    color1: '',
+                    color2: '',
+                    color3: '',
+                    color4: ''
+                });
+                clearInterval(ran); 
+            }
             if(nu===1){
                 this.setState({
                     color1: 'blue',
@@ -51,10 +70,10 @@ class Circle extends React.Component {
                     color4: 'yellow',
                 });
             }
-        },1000);
+        },1200); 
     }
     render() {
-        const {number,start} = this.props
+        const {start} = this.props
         if(start && this.state.temp && this.props.switch){
             this.setState({
                 temp: false
