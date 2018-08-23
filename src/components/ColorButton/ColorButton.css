@@ -1,0 +1,32 @@
+.simon-sound-button {
+  height: 15.625rem;
+  width: 15.625rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .simon-sound-button .simon-button {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: .5rem solid #424242; }
+  .simon-sound-button .action-button:focus,
+  .simon-sound-button .simon-button:focus {
+    outline: 0; }
+  .simon-sound-button .action-button,
+  .simon-sound-button .simon-button {
+    cursor: pointer; }
+  .simon-sound-button .first {
+    border-top-left-radius: 100%;
+    background-color: #1de9b6; }
+  .simon-sound-button .second {
+    border-top-right-radius: 100%;
+    background-color: #ff3d00; }
+  .simon-sound-button .third {
+    border-bottom-left-radius: 100%;
+    background-color: #ffea00; }
+  .simon-sound-button .forth {
+    border-bottom-right-radius: 100%;
+    background-color: #0277bd; }
+  .simon-sound-button .active {
+    opacity: 0.5; }

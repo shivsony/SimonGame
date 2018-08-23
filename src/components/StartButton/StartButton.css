@@ -1,0 +1,12 @@
+.start-button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+  .start-button-container .start-button {
+    height: 2.9rem;
+    width: 2.9rem;
+    border-radius: 100%;
+    border: .1rem solid #424242;
+    padding: 0; }
+  .start-button-container .start-button-caption {
+    text-align: center; }

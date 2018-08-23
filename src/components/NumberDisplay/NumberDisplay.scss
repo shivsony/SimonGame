@@ -1,0 +1,15 @@
+.display-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .display-number {
+      font-size: 2rem;
+      border-radius: .3rem;
+      border: .1rem solid #424242;
+      padding: .2rem .5rem;
+    }
+    .display-number-caption {
+      text-align: center;
+    }
+}
