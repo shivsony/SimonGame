@@ -28,6 +28,6 @@ You can get feedback on your project by sharing it with your friends on Facebook
 
 -----------------------To Run This Game Run These Two Commands----------------------------------
 
-            $ npm start
+            $ npm install
             
-            $ npm run 
+            $ npm start

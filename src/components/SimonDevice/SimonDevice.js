@@ -1,8 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Header from '../Header/Header';
-import { userWin } from '../../actions/Actions'
+import {
+   userWin,
+   switchDeviceToggle,
+   startGame,
+   addToSequence,
+ } from '../../actions/Actions'
 import './SimonDevice.css';
 import WinningMessage from '../WinningMessage/WinningMessage';
 import ColorButton from '../ColorButton/ColorButton';
@@ -22,13 +28,47 @@ const sounds = [
 });
 
 
+const RandomNumber = () => Math.floor(Math.random()*sounds.length) + 1;
+
+console.log(sounds);
+
+const TIMER_TIME = 500;
+const STEP_TO_WIN = 20;
 
 class SimonDevice extends React.Component {
     constructor(props){
-      super(props)
+      super(props);
+      this.playSimonSequence = this.playSimonSequence.bind(this);
+      this.stopPlay = this.stopPlay.bind(this);
+      this.addToSequence = this.addToSequence.bind(this);
+      this.lastSoundTimer = 0;
+      this.playTimer = 0
+      this.playNext = this.playNext.bind(this);
+    }
+    stopPlay() {
+      console.log('stop');
+    }
+    addToSequence() {
+      this.props.addToSequence(RandomNumber());
+
+    }
+    playSimonSequence() {
+      if(!this.props.isDeviceOn || this.props.hasUserWon ){
+        return
+      }
+      this.stopPlay();
+      console.log('readyToPlay');
+      if(!this.props.simonOrder.length){
+        this.addToSequence()
+      }
+      clearTimeout(this.lastSoundTimer);
+      this.playTimer = setInterval(this.playNext, TIMER_TIME);
+    }
+    playNext() {
+      console.log('playnext');
     }
     componentDidUpdate(preProps){
-      this.props.userWin();
+      // this.props.userWin();
       return
     }
     render(){
@@ -45,16 +85,23 @@ class SimonDevice extends React.Component {
                         </div>
                       </div>
                       <div className="simon-control-row">
-                        <NumberDisplay/>
-                        <StartButton/>
+                        <NumberDisplay count={5}/>
+                        <StartButton onClickStartButton={this.playSimonSequence}/>
                         <StrictButton/>
                       </div>
                       <div className="simon-control-row">
-                        <SimonOnOffButton/>
+                        <SimonOnOffButton
+                          onHitDeviceOnOff={this.props.switchDeviceToggle}
+                          isDeviceOn={this.props.isDeviceOn}
+                        />
                       </div>
                     </div>
                     <div className="simon-sound-actions">
-                      <ColorButton/>
+                      {
+                        sounds.map((items,i)=>{
+                          return <ColorButton/>
+                        })
+                      }
                     </div>
                   </div>
                 </div>
@@ -63,15 +110,29 @@ class SimonDevice extends React.Component {
     }
 }
 
+SimonDevice.preProps = {
+  isDeviceOn: PropTypes.bool.isRequired,
+  userWin: PropTypes.func.isRequired,
+  switchDeviceToggle: PropTypes.func.isRequired,
+  startGame: PropTypes.func.isRequired,
+  addToSequence: PropTypes.func.isRequired,
+}
+
 function mapStateToProps(state){
   return {
-    hasUserWon: state.hasUserWon
+    isDeviceOn: state.isDeviceOn,
+    hasUserWon: state.hasUserWon,
+    gameOn: state.gameOn,
+    simonOrder: state.simonOrder,
   };
 }
 
 function mapDispatchToProps(dispatch){
   return {
-    userWin: bindActionCreators(userWin , dispatch)
+    userWin: bindActionCreators(userWin , dispatch),
+    switchDeviceToggle: bindActionCreators(switchDeviceToggle , dispatch),
+    startGame: bindActionCreators(startGame,dispatch),
+    addToSequence: bindActionCreators(addToSequence, dispatch),
   }
 }
 

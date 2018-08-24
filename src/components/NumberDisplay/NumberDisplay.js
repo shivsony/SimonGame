@@ -5,7 +5,7 @@ class NumberDisplay extends React.Component {
   render() {
     return(
       <div className="display-container">
-        <div className="display-number">{lpad(2)}</div>
+        <div className="display-number">{lpad(this.props.count)}</div>
         <div className="display-number-caption">count</div>
       </div>
     );
