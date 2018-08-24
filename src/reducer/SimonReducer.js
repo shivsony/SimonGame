@@ -1,8 +1,12 @@
 const SWITCH_CLICK = 'SWITCH_CLICK';
 const USER_WON = "USER_WON";
 const GAME_ON = 'GAME_ON';
-const ADD_TO_SEQUENCE = 'ADD_TO_SEQUENCE'
-const PLAY_WITH_SEQUENCE = 'PLAY_WITH_SEQUENCE'
+const ADD_TO_SEQUENCE = 'ADD_TO_SEQUENCE';
+const PLAY_WITH_SEQUENCE = 'PLAY_WITH_SEQUENCE';
+const CURRENT_PLAYING = 'CURRENT_PLAYING';
+const INCREASE_INDEX = 'INCREASE_INDEX';
+const RESET_SIMON_INDEX = 'RESET_SIMON_INDEX';
+const RESET_SIMON_ORDER = 'RESET_SIMON_ORDER';
 const [UNDECIDED,CURRECT,NOTCURRECT] = ['UNDECIDED','CURRECT','NOTCURRECT'];
 const defaultState = {
     isDeviceOn: false,
@@ -32,6 +36,25 @@ function SimonReducer(state=defaultState,action){
               sequenceOrder: 0,
               currentSoundId: 0
             });
+        case CURRENT_PLAYING:
+            return Object.assign({},state, {currentSoundId: action.payload});
+        case INCREASE_INDEX:
+            return Object.assign({},state, {
+                simonOrderIndex: state.simonOrderIndex + 1 
+            });
+        case RESET_SIMON_INDEX:
+            return Object.assign({},state,{
+                simonOrderIndex: 0,
+                isPlaying: false
+            });
+        case RESET_SIMON_ORDER: 
+            return Object.assign({}, state, {
+                simonOrder: [],
+                simonOrderIndex: 0,
+                sequenceOrder: 0,
+                isCurrect: UNDECIDED,
+                hasUserWon: false
+            })
         default:
             return state;
     }
@@ -43,5 +66,9 @@ export {
   SWITCH_CLICK,
   GAME_ON,
   ADD_TO_SEQUENCE,
-  PLAY_WITH_SEQUENCE
+  PLAY_WITH_SEQUENCE,
+  CURRENT_PLAYING,
+  INCREASE_INDEX,
+  RESET_SIMON_INDEX,
+  RESET_SIMON_ORDER,
 }

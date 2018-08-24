@@ -3,7 +3,11 @@ import {
   GAME_ON,
   USER_WON,
   ADD_TO_SEQUENCE,
-  PLAY_WITH_SEQUENCE
+  PLAY_WITH_SEQUENCE,
+  CURRENT_PLAYING,
+  INCREASE_INDEX,
+  RESET_SIMON_INDEX,
+  RESET_SIMON_ORDER
 } from '../reducer/SimonReducer';
 
 
@@ -40,11 +44,37 @@ function startPlaySequence() {
   }
 }
 
+function currentPlaying(soundId=0) {
+  return {
+    type: CURRENT_PLAYING,
+    payload: soundId
+  }
+}
 
+function increaseIndex() {
+  return {
+    type: INCREASE_INDEX
+  }
+}
 
+function resetSimonIndex() {
+  return {
+    type: RESET_SIMON_INDEX
+  }
+}
+
+function resetSequence() {
+  return {
+    type: RESET_SIMON_ORDER
+  }
+}
 export {
   switchDeviceToggle,
   userWin,
   startGame,
-  addToSequence
+  addToSequence,
+  currentPlaying,
+  increaseIndex,
+  resetSimonIndex,
+  resetSequence
 }

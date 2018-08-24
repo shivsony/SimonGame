@@ -8,6 +8,9 @@ import {
    switchDeviceToggle,
    startGame,
    addToSequence,
+   currentPlaying,
+   increaseIndex,
+   resetSimonIndex,
  } from '../../actions/Actions'
 import './SimonDevice.css';
 import WinningMessage from '../WinningMessage/WinningMessage';
@@ -50,7 +53,6 @@ class SimonDevice extends React.Component {
     }
     addToSequence() {
       this.props.addToSequence(RandomNumber());
-
     }
     playSimonSequence() {
       if(!this.props.isDeviceOn || this.props.hasUserWon ){
@@ -66,6 +68,32 @@ class SimonDevice extends React.Component {
     }
     playNext() {
       console.log('playnext');
+      const findSound = sounds.find( (sound)=> ( sound.id === this.props.simonOrder[this.props.simonOrderIndex]));
+      console.log(findSound);
+      findSound.audio.currentTime = 0;
+      findSound.audio.play();
+      this.props.currentPlaying(findSound.id);
+      this.props.increaseIndex();
+      if(this.props.simonOrderIndex===this.props.simonOrder.length){
+        this.stopSequence();
+        this.lastSoundTimer = setTimeout(this.props.currentPlaying,TIMER_TIME);
+      }
+    }
+    stopSequence() {
+      console.log('stop sequence');
+      this.props.resetSimonIndex();
+      clearInterval(this.playTimer);
+    }
+    stopPlaySequence() {
+      this.stopSequence();
+      this.props.currentPlaying();
+    }
+    resetSequence() {
+      this.stopPlaySequence();
+      this.props.resetSequence();
+    }
+    playSequenceLog() {
+      setTimeout(this.playSimonSequence,TIMER_TIME);
     }
     componentDidUpdate(preProps){
       // this.props.userWin();
@@ -116,6 +144,9 @@ SimonDevice.preProps = {
   switchDeviceToggle: PropTypes.func.isRequired,
   startGame: PropTypes.func.isRequired,
   addToSequence: PropTypes.func.isRequired,
+  currentPlaying: PropTypes.func.isRequired,
+  increaseIndex: PropTypes.func.isRequired,
+  resetSimonIndex: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state){
@@ -124,6 +155,7 @@ function mapStateToProps(state){
     hasUserWon: state.hasUserWon,
     gameOn: state.gameOn,
     simonOrder: state.simonOrder,
+    simonOrderIndex: state.simonOrderIndex,
   };
 }
 
@@ -133,6 +165,9 @@ function mapDispatchToProps(dispatch){
     switchDeviceToggle: bindActionCreators(switchDeviceToggle , dispatch),
     startGame: bindActionCreators(startGame,dispatch),
     addToSequence: bindActionCreators(addToSequence, dispatch),
+    currentPlaying: bindActionCreators(currentPlaying, dispatch),
+    increaseIndex: bindActionCreators(increaseIndex, dispatch),
+    resetSimonIndex: bindActionCreators(resetSimonIndex,dispatch),
   }
 }
 
