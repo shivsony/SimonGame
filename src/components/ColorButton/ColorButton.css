@@ -19,14 +19,20 @@
   .simon-sound-button .first {
     border-top-left-radius: 100%;
     background-color: #1de9b6; }
+    .simon-sound-button .first .active {
+      opacity: 0.5; }
   .simon-sound-button .second {
     border-top-right-radius: 100%;
     background-color: #ff3d00; }
+    .simon-sound-button .second .active {
+      opacity: 0.5; }
   .simon-sound-button .third {
     border-bottom-left-radius: 100%;
     background-color: #ffea00; }
+    .simon-sound-button .third .active {
+      opacity: 0.5; }
   .simon-sound-button .forth {
     border-bottom-right-radius: 100%;
     background-color: #0277bd; }
-  .simon-sound-button .active {
-    opacity: 0.5; }
+    .simon-sound-button .forth .active {
+      opacity: 0.5; }

@@ -11,6 +11,8 @@ import {
    currentPlaying,
    increaseIndex,
    resetSimonIndex,
+   strictModeToggle,
+   stopPlaySequence,
  } from '../../actions/Actions'
 import './SimonDevice.css';
 import WinningMessage from '../WinningMessage/WinningMessage';
@@ -19,6 +21,11 @@ import NumberDisplay from '../NumberDisplay/NumberDisplay';
 import StartButton from '../StartButton/StartButton';
 import StrictButton from '../StrictButton/StrictButton';
 import SimonOnOffButton from '../SimonOnOffButton/SimonOnOffButton';
+import {
+  CURRECT,
+  NOTCURRECT,
+  UNDECIDED
+} from '../../reducer/SimonReducer';
 
 const sounds = [
   { id: 1, src: 'https://s3.amazonaws.com/freecodecamp/simonSound1.mp3', className: 'first' },
@@ -32,8 +39,6 @@ const sounds = [
 
 
 const RandomNumber = () => Math.floor(Math.random()*sounds.length) + 1;
-
-console.log(sounds);
 
 const TIMER_TIME = 500;
 const STEP_TO_WIN = 20;
@@ -49,7 +54,8 @@ class SimonDevice extends React.Component {
       this.playNext = this.playNext.bind(this);
     }
     stopPlay() {
-      console.log('stop');
+      this.props.resetSimonIndex();
+      clearInterval(this.playTimer);
     }
     addToSequence() {
       this.props.addToSequence(RandomNumber());
@@ -59,7 +65,6 @@ class SimonDevice extends React.Component {
         return
       }
       this.stopPlay();
-      console.log('readyToPlay');
       if(!this.props.simonOrder.length){
         this.addToSequence()
       }
@@ -96,9 +101,36 @@ class SimonDevice extends React.Component {
       setTimeout(this.playSimonSequence,TIMER_TIME);
     }
     componentDidUpdate(preProps){
-      // this.props.userWin();
-      return
+      if(preProps.isDeviceOn && !this.props.isDeviceOn){
+        clearInterval(this.playTimer);
+        this.props.resetSimonIndex();
+        this.props.resetSequence();
+        if(this.props.isStrictMode){
+          this.props.strictModeToggle();
+        }
+        return
+      }
+      if(this.props.isCurrect=== NOTCURRECT){
+        if(this.props.isStrictMode){
+          this.props.resetSequence();
+        }
+        this.props.playSequenceLog();
+      }
+      if(this.props.isCurrect === CURRECT && this.props.simonOrder.length === this.props.sequenceOrder){
+        if(this.props.simonOrder.length===STEP_TO_WIN){
+          this.props.userWin();
+          this.props.currentPlaying();
+          return;
+        }
+        this.addToSequence();
+        this.playSequenceLog();
+      }
     }
+    handleClickAction(soundId) {
+      this.props.currentPlaying(soundId);
+      this.props.repeatSequence(this.props.sequenceOrder + 1);
+    }
+
     render(){
         return(
             <div className="App">
@@ -113,7 +145,7 @@ class SimonDevice extends React.Component {
                         </div>
                       </div>
                       <div className="simon-control-row">
-                        <NumberDisplay count={5}/>
+                        <NumberDisplay count={this.props.simonOrder.length}/>
                         <StartButton onClickStartButton={this.playSimonSequence}/>
                         <StrictButton/>
                       </div>
@@ -126,9 +158,21 @@ class SimonDevice extends React.Component {
                     </div>
                     <div className="simon-sound-actions">
                       {
-                        sounds.map((items,i)=>{
-                          return <ColorButton/>
-                        })
+                        sounds.map(sound=> (<ColorButton
+                            isPlable={
+                              this.props.isDeviceOn &&
+                              !this.props.isPlaying &&
+                              this.props.simonOrder.length !== 0 &&
+                              !this.props.hasUserWon
+                            }
+                            OnButtonClick={this.handleClickAction}
+                            key={sound.id}
+                            currentSoundId={this.props.currentSoundId}
+                            soundId={sound.id}
+                            audio={sound.audio}
+                            className={sound.className}
+                          />
+                        ))}
                       }
                     </div>
                   </div>
@@ -156,6 +200,11 @@ function mapStateToProps(state){
     gameOn: state.gameOn,
     simonOrder: state.simonOrder,
     simonOrderIndex: state.simonOrderIndex,
+    isStrictMode: state.isStrictMode,
+    isCurrect: state.isCurrect,
+    currentSoundId: state.currentSoundId,
+    isPlaying: state.isPlaying,
+    sequenceOrder: state.sequenceOrder,
   };
 }
 
@@ -168,6 +217,7 @@ function mapDispatchToProps(dispatch){
     currentPlaying: bindActionCreators(currentPlaying, dispatch),
     increaseIndex: bindActionCreators(increaseIndex, dispatch),
     resetSimonIndex: bindActionCreators(resetSimonIndex,dispatch),
+    strictModeToggle: bindActionCreators(strictModeToggle, dispatch),
   }
 }
 

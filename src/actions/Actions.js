@@ -7,7 +7,8 @@ import {
   CURRENT_PLAYING,
   INCREASE_INDEX,
   RESET_SIMON_INDEX,
-  RESET_SIMON_ORDER
+  RESET_SIMON_ORDER,
+  STRICT_MODE_TOGGLE
 } from '../reducer/SimonReducer';
 
 
@@ -68,6 +69,12 @@ function resetSequence() {
     type: RESET_SIMON_ORDER
   }
 }
+
+function strictModeToggle() {
+  return {
+    type: STRICT_MODE_TOGGLE
+  }
+}
 export {
   switchDeviceToggle,
   userWin,
@@ -76,5 +83,6 @@ export {
   currentPlaying,
   increaseIndex,
   resetSimonIndex,
-  resetSequence
+  resetSequence,
+  strictModeToggle
 }

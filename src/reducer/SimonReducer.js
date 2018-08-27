@@ -7,6 +7,7 @@ const CURRENT_PLAYING = 'CURRENT_PLAYING';
 const INCREASE_INDEX = 'INCREASE_INDEX';
 const RESET_SIMON_INDEX = 'RESET_SIMON_INDEX';
 const RESET_SIMON_ORDER = 'RESET_SIMON_ORDER';
+const STRICT_MODE_TOGGLE = 'STRICT_MODE_TOGGLE';
 const [UNDECIDED,CURRECT,NOTCURRECT] = ['UNDECIDED','CURRECT','NOTCURRECT'];
 const defaultState = {
     isDeviceOn: false,
@@ -17,6 +18,7 @@ const defaultState = {
     sequenceOrder: 0,
     simonOrderIndex: 0,
     currentSoundId: 0,
+    isStrictMode: false,
     hasUserWon: false
 }
 function SimonReducer(state=defaultState,action){
@@ -40,14 +42,14 @@ function SimonReducer(state=defaultState,action){
             return Object.assign({},state, {currentSoundId: action.payload});
         case INCREASE_INDEX:
             return Object.assign({},state, {
-                simonOrderIndex: state.simonOrderIndex + 1 
+                simonOrderIndex: state.simonOrderIndex + 1
             });
         case RESET_SIMON_INDEX:
             return Object.assign({},state,{
                 simonOrderIndex: 0,
                 isPlaying: false
             });
-        case RESET_SIMON_ORDER: 
+        case RESET_SIMON_ORDER:
             return Object.assign({}, state, {
                 simonOrder: [],
                 simonOrderIndex: 0,
@@ -55,6 +57,10 @@ function SimonReducer(state=defaultState,action){
                 isCurrect: UNDECIDED,
                 hasUserWon: false
             })
+        case STRICT_MODE_TOGGLE:
+            return Object.assign({},state,{
+              isStrictMode: !state.isStrictMode
+            });
         default:
             return state;
     }
@@ -71,4 +77,8 @@ export {
   INCREASE_INDEX,
   RESET_SIMON_INDEX,
   RESET_SIMON_ORDER,
+  STRICT_MODE_TOGGLE,
+  NOTCURRECT,
+  CURRECT,
+  UNDECIDED,
 }

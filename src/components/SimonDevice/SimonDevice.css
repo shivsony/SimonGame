@@ -4,7 +4,7 @@
   padding: 0; }
   .App .simon-device-wraper {
     width: 100%;
-    height: 500px;
+    height: 520px;
     background-image: url("../../back.png"); }
     .App .simon-device-wraper .simon-device {
       display: flex;
@@ -21,7 +21,7 @@
         height: 13.75rem;
         width: 13.75rem;
         position: absolute;
-        top: 15rem;
+        top: 16rem;
         left: 50%;
         transform: translate(-50%, -50%); }
         .App .simon-device-wraper .simon-device .simon-action-control .simon-control-row {
@@ -31,3 +31,15 @@
           justify-content: space-around; }
           .App .simon-device-wraper .simon-device .simon-action-control .simon-control-row .simon-control-header {
             text-align: center; }
+      .App .simon-device-wraper .simon-device .simon-sound-actions {
+        border-radius: 100%;
+        border: .5rem solid #424242;
+        background-color: #424242;
+        overflow: hidden;
+        display: flex;
+        width: 31.25rem;
+        height: 31.25rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0; }

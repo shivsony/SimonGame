@@ -26,25 +26,37 @@
     .first {
         border-top-left-radius: 100%;
         background-color: #1de9b6;
+
+        .active {
+            opacity: 0.5;
+        }
     }
 
     .second {
         border-top-right-radius: 100%;
         background-color: #ff3d00;
+
+        .active {
+            opacity: 0.5;
+        }
     }
 
     .third {
         border-bottom-left-radius: 100%;
         background-color: #ffea00;
+
+        .active {
+            opacity: 0.5;
+        }
     }
 
     .forth {
         border-bottom-right-radius: 100%;
         background-color: #0277bd;
+
+        .active {
+            opacity: 0.5;
+        }
     }
 
-    .active {
-        opacity: 0.5;
-
-    }
 }
